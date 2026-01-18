@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазин Phaner</title>
+    <title>Phaner Shop</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: #1c1c1c;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
             color: white;
             margin: 0;
             padding: 20px;
@@ -16,77 +16,73 @@
             flex-direction: column;
             align-items: center;
         }
-        h1 { color: #0088cc; }
-        .catalog {
+        h1 { color: #0088cc; margin-bottom: 30px; }
+        .container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            grid-template-columns: 1fr;
+            gap: 20px;
             width: 100%;
-            max-width: 500px;
+            max-width: 400px;
         }
         .card {
-            background: #2b2b2b;
+            background: #2c2c2c;
             border-radius: 15px;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             border: 1px solid #3d3d3d;
         }
-        .card img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
         .price {
-            font-size: 1.2em;
+            font-size: 24px;
             font-weight: bold;
+            color: #4caf50;
             margin: 10px 0;
-            color: #4db6ac;
         }
         button {
-            background: #0088cc;
+            background-color: #0088cc;
             color: white;
             border: none;
-            padding: 10px;
-            border-radius: 8px;
-            width: 100%;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+            width: 100%;
         }
-        button:active { transform: scale(0.98); }
+        button:active {
+            transform: scale(0.95);
+            background-color: #0077b5;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Мой Магазин</h1>
-    <p>Добро пожаловать, Хозяин! Выберите товар:</p>
+    <h1>Phaner Shop</h1>
 
-    <div class="catalog">
+    <div class="container">
         <div class="card">
-            <img src="https://picsum.photos/200/200?random=11" alt="Товар">
-            <div class="name">Картина #1</div>
-            <div class="price">500 ₽</div>
-            <button onclick="buy('Картина #1', 500)">Купить</button>
+            <h3>Премиум Товар</h3>
+            <p>Лучшее качество специально для вас.</p>
+            <div class="price">1500 ₽</div>
+            <button onclick="buy('Премиум Товар (1500 ₽)')">Купить</button>
         </div>
+
         <div class="card">
-            <img src="https://picsum.photos/200/200?random=12" alt="Товар">
-            <div class="name">Картина #2</div>
-            <div class="price">1200 ₽</div>
-            <button onclick="buy('Картина #2', 1200)">Купить</button>
+            <h3>Стандартный Пакет</h3>
+            <p>Оптимальный выбор на каждый день.</p>
+            <div class="price">800 ₽</div>
+            <button onclick="buy('Стандартный Пакет (800 ₽)')">Купить</button>
         </div>
     </div>
 
     <script>
-        let tg = window.Telegram.WebApp;
-        tg.ready();
-        tg.expand(); // Разворачиваем на весь экран
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Раскрываем на весь экран
 
-        function buy(name, price) {
-            // Передаем данные боту
-            let data = {
-                item_name: name,
-                item_price: price
-            };
-            tg.sendData(JSON.stringify(data));
+        function buy(productName) {
+            // Отправляем данные боту и закрываем окно
+            tg.sendData(productName);
         }
     </script>
 </body>
